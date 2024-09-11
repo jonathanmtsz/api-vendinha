@@ -55,9 +55,8 @@ public class UserController {
 
     @PutMapping("/{id}/status")
     public UserResponseDto setActive(
-            @PathVariable long id,
-            @RequestBody UserRequestDto is_active
+            @PathVariable long id
     ){
-        return userService.setActive(id, is_active);
+        return userService.setActive(id);
     }
 }

@@ -21,5 +21,5 @@ public interface UserServiceInterface {
     UserResponseDto save(UserRequestDto userRequestDto);
     UserResponseDto update(Long id, UserRequestDto userRequestDto);
     UserResponseDto getId(Long id);
-    UserResponseDto setActive(long id, UserRequestDto is_active);
+    UserResponseDto setActive(long id);
 }

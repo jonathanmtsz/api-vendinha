@@ -86,10 +86,15 @@ public class UserServiceImpl implements UserServiceInterface {
     }
 
     @Override
-    public UserResponseDto setActive(long id, UserRequestDto is_active) {
+    public UserResponseDto setActive(long id) {
        User user = userRepository.findById(id).orElseThrow();
 
-       user.setIs_active(is_active.getIs_active());
+       if(user.getIs_active() == Boolean.FALSE){
+           user.setIs_active(Boolean.TRUE);
+       } else {
+           user.setIs_active(Boolean.FALSE);
+       }
+
        userRepository.save(user);
 
        return getUserResponseDto(user);
