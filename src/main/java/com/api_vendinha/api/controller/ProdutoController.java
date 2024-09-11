@@ -35,4 +35,26 @@ public class ProdutoController {
         Set<Produto> produtos = produtoService.findAllByPedido_idIsNotEmpty();
         return ResponseEntity.ok(produtos);
     }
+
+    @DeleteMapping("/{id}/delete")
+    public ProdutoResponseDTO delete(@PathVariable long id) {
+        // Chama o serviço para salvar o usuário e retorna a resposta.
+        return produtoService.delete(id);
+    }
+
+    @GetMapping("/{id}")
+    public ProdutoResponseDTO getById(@PathVariable long id) {
+        // Chama o serviço para salvar o usuário e retorna a resposta.
+        return produtoService.getId(id);
+    }
+
+    @PutMapping("/{id}")
+    public ProdutoResponseDTO salvar(
+            @RequestBody ProdutoRequestDTO produtoRequestDTO,
+            @PathVariable long id
+    ) {
+        // Chama o serviço para salvar o usuário e retorna a resposta.
+        return produtoService.update(id, produtoRequestDTO);
+    }
+
 }

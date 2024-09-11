@@ -4,7 +4,6 @@ import com.api_vendinha.api.Infrastructure.repository.PedidosRepository;
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDTO;
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDTO;
 import com.api_vendinha.api.domain.entities.Produto;
-import com.api_vendinha.api.domain.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +72,7 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
     }
 
     @Override
-    public ProdutoResponseDTO delete(Long id, ProdutoRequestDTO produtoRequestDTO) {
+    public ProdutoResponseDTO delete(Long id) {
         Produto deleted = pedidosRepository.findById(id).orElseThrow();
 
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
