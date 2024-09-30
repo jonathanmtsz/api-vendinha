@@ -30,7 +30,7 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
         Produto savedProduto = pedidosRepository.save(produto);
 
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
-        produtoResponseDTO.setId(savedProduto.getPedido_id());
+        produtoResponseDTO.setId(savedProduto.ge());
         produtoResponseDTO.setQntd(savedProduto.getQntd());
         produtoResponseDTO.setName(savedProduto.getName());
         produtoResponseDTO.setPreco(savedProduto.getPreco());

@@ -19,6 +19,6 @@ public interface PedidosRepository extends JpaRepository<Produto, Long> {
 
     Optional<Produto> findByName(String name);
 
-    @Query("SELECT p FROM Produto p WHERE p.pedido_id IS NOT NULL")
+    @Query("SELECT p FROM Produto p WHERE p.produto_id IS NOT NULL")
     Set<Produto> findAllByPedido_idIsNotEmpty();
 }
