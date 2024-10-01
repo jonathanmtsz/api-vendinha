@@ -75,8 +75,6 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
     public ProdutoResponseDTO delete(Long id) {
         Produto deleted = pedidosRepository.findById(id).orElseThrow();
 
-        pedidosRepository.delete(deleted);
-
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
         produtoResponseDTO.setId(deleted.getPedido_id());
         produtoResponseDTO.setQntd(deleted.getQntd());
