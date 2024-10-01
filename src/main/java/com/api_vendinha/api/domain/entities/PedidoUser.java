@@ -7,21 +7,26 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "pedidos_user")
+@Table(name = "produto")
 @NoArgsConstructor // Gera um construtor sem argumentos, necessário para a criação de instâncias da entidade pelo JPA.
 @AllArgsConstructor
-
-public class Produto {
+public class PedidoUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o valor do ID será gerado automaticamente pelo banco de dados (auto-incremento).
     private Long id;
 
-    @Column(nullable = false)
-    private int pedido_id;
-    @Column(nullable = false)
-    private int user_id;
-    @Column(nullable = false)
-    private int quantity;
-    @Column(nullable = false)
-    private String price;
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
+
+    @ManyToOne
+    @JoinColumn(name = "produto_id")
+    private Produto produto_id;
+
+
+
+
+
+
+
 }

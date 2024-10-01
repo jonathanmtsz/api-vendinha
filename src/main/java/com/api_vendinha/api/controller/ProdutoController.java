@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -31,8 +32,8 @@ public class ProdutoController {
 
 
     @GetMapping("/com-ids-existentes")
-    public ResponseEntity<Set<Produto>> getAllByIdExists() {
-        Set<Produto> produtos = produtoService.findAllByPedido_idIsNotEmpty();
+    public ResponseEntity<List<Produto>> getAllByIdExists() {
+        List<Produto> produtos = produtoService.findAllByPedido_idIsNotEmpty();
         return ResponseEntity.ok(produtos);
     }
 
