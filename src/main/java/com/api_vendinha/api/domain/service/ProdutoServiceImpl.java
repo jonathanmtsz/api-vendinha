@@ -13,11 +13,11 @@ import java.util.Set;
 @Service
 public class ProdutoServiceImpl implements ProdutoServiceInterface {
 
-    private final ProdutoRepository pedidosRepository;
+    private final ProdutoRepository produtoRepository;
 
     @Autowired
     public ProdutoServiceImpl(ProdutoRepository pedidosRepository) {
-        this.pedidosRepository = pedidosRepository;
+        this.produtoRepository = pedidosRepository;
     }
 
 
@@ -28,7 +28,7 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
         produto.setPreco(produtoRequestDTO.getPreco());
         produto.setName(produtoRequestDTO.getName());
 
-        Produto savedProduto = pedidosRepository.save(produto);
+        Produto savedProduto = produtoRepository.save(produto);
 
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
         produtoResponseDTO.setId(savedProduto.getProduto_id());
@@ -41,13 +41,13 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
 
     @Override
     public ProdutoResponseDTO update(Long id, ProdutoRequestDTO produtoRequestDTO) {
-        Produto foundProduto = pedidosRepository.findById(id).orElseThrow();
+        Produto foundProduto = produtoRepository.findById(id).orElseThrow();
 
         foundProduto.setName(produtoRequestDTO.getName());
         foundProduto.setQntd(produtoRequestDTO.getQntd());
         foundProduto.setPreco(produtoRequestDTO.getPreco());
 
-        Produto savedProduto = pedidosRepository.save(foundProduto);
+        Produto savedProduto = produtoRepository.save(foundProduto);
 
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
         produtoResponseDTO.setId(savedProduto.getProduto_id());
@@ -61,7 +61,7 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
 
     @Override
     public ProdutoResponseDTO getId(Long id) {
-        Produto savedProduto =  pedidosRepository.findById(id).orElseThrow();
+        Produto savedProduto =  produtoRepository.findById(id).orElseThrow();
 
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
         produtoResponseDTO.setId(savedProduto.getProduto_id());
@@ -74,7 +74,7 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
 
     @Override
     public ProdutoResponseDTO delete(Long id) {
-        Produto deleted = pedidosRepository.findById(id).orElseThrow();
+        Produto deleted = produtoRepository.findById(id).orElseThrow();
 
         ProdutoResponseDTO produtoResponseDTO = new ProdutoResponseDTO();
         produtoResponseDTO.setId(deleted.getProduto_id());
@@ -86,8 +86,8 @@ public class ProdutoServiceImpl implements ProdutoServiceInterface {
     }
 
     @Override
-    public List<Produto> findAllByPedido_idIsNotEmpty() {
-        return pedidosRepository.findAll();
+    public List<Produto> findAll() {
+        return produtoRepository.findAll();
     }
 
 

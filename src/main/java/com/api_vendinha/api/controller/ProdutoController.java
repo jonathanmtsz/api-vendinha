@@ -1,18 +1,14 @@
 package com.api_vendinha.api.controller;
 
 import com.api_vendinha.api.domain.dtos.request.ProdutoRequestDTO;
-import com.api_vendinha.api.domain.dtos.request.UserRequestDto;
 import com.api_vendinha.api.domain.dtos.response.ProdutoResponseDTO;
-import com.api_vendinha.api.domain.dtos.response.UserResponseDto;
 import com.api_vendinha.api.domain.entities.Produto;
 import com.api_vendinha.api.domain.service.ProdutoServiceInterface;
-import com.api_vendinha.api.domain.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping("/api/produtos")
@@ -31,9 +27,9 @@ public class ProdutoController {
     }
 
 
-    @GetMapping("/com-ids-existentes")
+    @GetMapping("/all")
     public ResponseEntity<List<Produto>> getAllByIdExists() {
-        List<Produto> produtos = produtoService.findAllByPedido_idIsNotEmpty();
+        List<Produto> produtos = produtoService.findAll();
         return ResponseEntity.ok(produtos);
     }
 

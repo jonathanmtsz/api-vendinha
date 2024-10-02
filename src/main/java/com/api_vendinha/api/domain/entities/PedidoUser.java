@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Table(name = "produto")
+@Table(name = "pedidos_user")
 @NoArgsConstructor // Gera um construtor sem argumentos, necessário para a criação de instâncias da entidade pelo JPA.
 @AllArgsConstructor
 public class PedidoUser {
@@ -23,7 +23,11 @@ public class PedidoUser {
     @JoinColumn(name = "produto_id")
     private Produto produto_id;
 
+    @Column
+    private int quantity;
 
+    @Column
+    private float price;
 
 
 

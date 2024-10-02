@@ -23,10 +23,9 @@ public class Produto {
     @Column(nullable = false)
     private int qntd;
     @Column(nullable = false)
-    private String preco;
+    private float preco;
 
     @OneToMany(mappedBy = "produto_id")
-    Set<PedidoUser> produtos;
+    private Set<PedidoUser> pedidos;
 
-    @OneToMany(mappedBy = )
 }

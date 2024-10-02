@@ -6,6 +6,6 @@ import lombok.Data;
 public class ProdutoRequestDTO {
     private String name;
     private int qntd;
-    private String preco;
+    private float preco;
 
 }

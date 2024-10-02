@@ -7,6 +7,6 @@ public class ProdutoResponseDTO {
     private long id;
     private String name;
     private int qntd;
-    private String preco;
+    private float preco;
 
 }
