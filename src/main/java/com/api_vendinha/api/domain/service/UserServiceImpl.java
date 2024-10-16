@@ -48,8 +48,7 @@ public class UserServiceImpl implements UserServiceInterface {
         user.setName(userRequestDto.getName());
         user.setEmail(userRequestDto.getEmail());
         user.setPassword(userRequestDto.getPassword());
-        user.setCep(userRequestDto.getCep());
-        user.setCpf(userRequestDto.getCpf());
+        user.setCnpj(userRequestDto.getCnpj());
         user.setIs_active(Boolean.TRUE);
 
 
@@ -68,8 +67,7 @@ public class UserServiceImpl implements UserServiceInterface {
         user.setName(userRequestDto.getName());
         user.setEmail(userRequestDto.getEmail());
         user.setPassword(userRequestDto.getPassword());
-        user.setCep(userRequestDto.getCep());
-        user.setCpf(userRequestDto.getCpf());
+        user.setCnpj(userRequestDto.getCnpj());
         user.setIs_active(Boolean.TRUE);
 
         userRepository.save(user);
@@ -107,8 +105,7 @@ public class UserServiceImpl implements UserServiceInterface {
         userResponseDto.setName(user.getName());
         userResponseDto.setEmail(user.getEmail());
         userResponseDto.setPassword(user.getPassword());
-        userResponseDto.setCep(user.getCep());
-        userResponseDto.setCpf(user.getCpf());
+        userResponseDto.setCnpj(user.getCnpj());
         userResponseDto.setIs_active(user.getIs_active());
 
         return userResponseDto;
