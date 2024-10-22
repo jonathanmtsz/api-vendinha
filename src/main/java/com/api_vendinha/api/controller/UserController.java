@@ -2,14 +2,18 @@ package com.api_vendinha.api.controller;
 
 import com.api_vendinha.api.domain.dtos.request.UserRequestDto;
 import com.api_vendinha.api.domain.dtos.response.UserResponseDto;
+import com.api_vendinha.api.domain.entities.User;
 import com.api_vendinha.api.domain.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Controlador REST para gerenciar operações relacionadas aos usuários.
  */
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/users") // Define o caminho base para as requisições deste controlador.
 public class UserController {
 
@@ -59,4 +63,11 @@ public class UserController {
     ){
         return userService.setActive(id);
     }
+
+    @GetMapping("/listAll")
+    public List<User> listAll(){
+        return userService.listAllUsers();
+    }
+
+
 }
