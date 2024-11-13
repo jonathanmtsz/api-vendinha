@@ -5,6 +5,9 @@ import com.api_vendinha.api.domain.dtos.response.UserResponseDto;
 import com.api_vendinha.api.domain.entities.User;
 import com.api_vendinha.api.domain.service.UserServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,7 +16,7 @@ import java.util.List;
  * Controlador REST para gerenciar operações relacionadas aos usuários.
  */
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/users") // Define o caminho base para as requisições deste controlador.
 public class UserController {
 
@@ -37,9 +40,15 @@ public class UserController {
      * @return DTO com as informações do usuário salvo, incluindo o ID gerado.
      */
     @PostMapping // Define que este método lida com requisições HTTP POST.
-    public UserResponseDto salvar(@RequestBody UserRequestDto userRequestDto) {
-        // Chama o serviço para salvar o usuário e retorna a resposta.
-        return userService.save(userRequestDto);
+    public  ResponseEntity<?> salvar(@RequestBody UserRequestDto userRequestDto) {
+        try{
+            return ResponseEntity.ok(userService.save(userRequestDto));
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro - " + e.getMessage());
+        }
+
+
     }
 
     @PutMapping("/{id}")

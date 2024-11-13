@@ -4,12 +4,10 @@ import com.api_vendinha.api.domain.dtos.request.PedidoRequestDTO;
 import com.api_vendinha.api.domain.dtos.response.PedidoResponseDTO;
 import com.api_vendinha.api.domain.service.PedidosUserImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/pedidos")
 public class PedidoUserController {
     private final PedidosUserImpl pedidosUserImpl;

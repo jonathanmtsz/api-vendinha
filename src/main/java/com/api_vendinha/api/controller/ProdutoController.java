@@ -27,7 +27,6 @@ public class ProdutoController {
         return produtoService.save(produtoRequestDTO);
     }
 
-
     @GetMapping("/all")
     public ResponseEntity<List<Produto>> getAllByIdExists() {
         List<Produto> produtos = produtoService.findAll();

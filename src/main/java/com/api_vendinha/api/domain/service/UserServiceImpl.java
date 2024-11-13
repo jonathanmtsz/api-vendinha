@@ -4,9 +4,11 @@ import com.api_vendinha.api.Infrastructure.repository.UserRepository;
 import com.api_vendinha.api.domain.dtos.request.UserRequestDto;
 import com.api_vendinha.api.domain.dtos.response.UserResponseDto;
 import com.api_vendinha.api.domain.entities.User;
+import org.hibernate.jdbc.Expectation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,6 +48,25 @@ public class UserServiceImpl implements UserServiceInterface {
         // Cria uma nova instância de User.
         User user = new User();
         // Define o nome do usuário a partir do DTO.
+
+        //Field[] fields = obj.getClass().getDeclaredFields();
+
+        Field[] fields = userRequestDto.getClass().getDeclaredFields();
+        for(Field field : fields){
+            field.setAccessible(true);
+            try {
+                Object valor = field.get(userRequestDto);
+                if (valor == null ||
+                        (valor instanceof String && ((String) valor).isEmpty()) ||
+                        (valor instanceof Number && ((Number) valor).doubleValue() == 0)) {
+                    throw new RuntimeException("O campo '" + field.getName() + "' NÃO PODE SER VAZIO");
+                }
+            } catch (IllegalAccessException ignored) {
+
+            }
+        }
+
+        
         user.setName(userRequestDto.getName());
         user.setEmail(userRequestDto.getEmail());
         user.setPassword(userRequestDto.getPassword());
