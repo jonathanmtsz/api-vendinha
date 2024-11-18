@@ -11,6 +11,7 @@ import com.api_vendinha.api.domain.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -86,6 +87,11 @@ public class PedidosUserImpl implements PedidosUserServiceInterface {
         return responseDTO;
 
 
+    }
+
+    @Override
+    public List<PedidoUser> listAll() {
+        return pedidosUserRepository.findAll();
     }
 
 
