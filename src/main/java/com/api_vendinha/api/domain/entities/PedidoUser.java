@@ -15,6 +15,9 @@ public class PedidoUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o valor do ID será gerado automaticamente pelo banco de dados (auto-incremento).
     private Long id;
 
+    @Column
+    private Boolean status;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user_id;

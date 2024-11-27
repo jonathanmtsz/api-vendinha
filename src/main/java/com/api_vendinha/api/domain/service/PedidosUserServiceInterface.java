@@ -10,4 +10,6 @@ public interface PedidosUserServiceInterface {
     int checkQnt(Produto produto);
     PedidoResponseDTO formatPedidoRequestDTO(PedidoUser pedido);
     List<PedidoUser> listAll ();
+    PedidoResponseDTO inativarPedido(long IdPedidoUser);
+    List<PedidoUser> listAllActive();
 }

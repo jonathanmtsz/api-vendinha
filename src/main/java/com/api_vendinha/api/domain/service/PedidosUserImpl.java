@@ -57,6 +57,7 @@ public class PedidosUserImpl implements PedidosUserServiceInterface {
             float price;
             price = (produto.orElseThrow().getPreco() * pedido.getQuantity());
             pedido.setPrice(price);
+            pedido.setStatus(Boolean.TRUE);
         } else {
             throw new RuntimeException("Quantidade disponivel do produto é menor que a quantidade requisitada no pedido");
         }
@@ -79,7 +80,7 @@ public class PedidosUserImpl implements PedidosUserServiceInterface {
     @Override
     public PedidoResponseDTO formatPedidoRequestDTO(PedidoUser pedido) {
         PedidoResponseDTO responseDTO = new PedidoResponseDTO();
-        responseDTO.setId(pedido.getId());
+        responseDTO.setId(String.valueOf(pedido.getId()));
         responseDTO.setPrice(pedido.getPrice());
         responseDTO.setQuantity(pedido.getQuantity());
         responseDTO.setUser_id(pedido.getUser_id().getUser_id());
@@ -92,6 +93,37 @@ public class PedidosUserImpl implements PedidosUserServiceInterface {
     @Override
     public List<PedidoUser> listAll() {
         return pedidosUserRepository.findAll();
+    }
+
+    @Override
+    public PedidoResponseDTO inativarPedido(long IdPedidoUser) {
+        Optional<PedidoUser> pedido = pedidosUserRepository.findById(IdPedidoUser);
+        if (pedido.isPresent()) {
+            PedidoUser solvedPedido = pedido.get();
+            if(solvedPedido.getStatus().equals(Boolean.FALSE)){
+                throw new RuntimeException("Venda já foi inativada");
+            } else {
+                solvedPedido.setStatus(Boolean.FALSE);
+            }
+
+            Optional<Produto> produto = produtoRepository.findById(solvedPedido.getProduto_id().getProduto_id());
+            if(produto.isPresent()){
+                Produto solvedProduct = produto.get();
+                solvedProduct.setQntd(solvedProduct.getQntd() + solvedPedido.getQuantity());
+                pedidosUserRepository.save(solvedPedido);
+                produtoRepository.save(solvedProduct);
+            } else {
+                throw new RuntimeException("Produto não encontrado no estoque");
+            }
+            return formatPedidoRequestDTO(solvedPedido);
+        } else {
+            throw new RuntimeException("Venda não encontrada no sistema");
+        }
+    }
+
+    @Override
+    public List<PedidoUser> listAllActive() {
+        return pedidosUserRepository.findAllActive();
     }
 
 

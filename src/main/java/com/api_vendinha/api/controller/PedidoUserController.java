@@ -23,6 +23,21 @@ public class PedidoUserController {
 
     }
 
+    @GetMapping("/listAllActive")
+    public ResponseEntity<?> listAllActive(){
+        try {
+            return ResponseEntity.ok(pedidosUserImpl.listAllActive());
+        } catch(Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Erro - " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/{idPedidoUser}/inativar")
+    public PedidoResponseDTO inativar(@PathVariable Long idPedidoUser){
+        return pedidosUserImpl.inativarPedido(idPedidoUser);
+    }
+
     @PostMapping("/new")
     public PedidoResponseDTO save(@RequestBody PedidoRequestDTO pedidoRequestDTO){
         return pedidosUserImpl.save(pedidoRequestDTO);
